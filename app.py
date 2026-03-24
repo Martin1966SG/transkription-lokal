@@ -8,7 +8,7 @@ from transcriber import Transcriber
 from text_inserter import insert_text
 from hotkey_handler import HotkeyHandler
 from tray_icon import TrayIcon
-from notification import show_error
+from notification import show_error, show_status
 
 
 class State(Enum):
@@ -52,6 +52,7 @@ class App:
                 return
             self._state = State.RECORDING
         self._tray.set_recording()
+        show_status("recording")
         try:
             self._recorder.start()
         except Exception as e:
@@ -66,6 +67,7 @@ class App:
                 return
             self._state = State.PROCESSING
         self._tray.set_processing()
+        show_status("processing")
         threading.Thread(target=self._process, daemon=True).start()
 
     def _process(self) -> None:
@@ -85,6 +87,7 @@ class App:
             with self._lock:
                 self._state = State.IDLE
             self._tray.set_idle()
+            show_status("idle", duration_ms=1500)
 
     def _open_settings(self) -> None:
         def on_save(new_settings: Settings) -> None:
