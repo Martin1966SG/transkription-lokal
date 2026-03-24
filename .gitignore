@@ -56,6 +56,9 @@ pytest_cache/
 dmypy.json
 .pytype/
 
+# Claude Code
+.claude/
+
 # IDE / Editor
 .vscode/
 .idea/
