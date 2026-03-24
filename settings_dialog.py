@@ -2,7 +2,6 @@
 import tkinter as tk
 from tkinter import ttk
 from typing import Callable, List, Tuple
-import sounddevice as sd
 from settings import Settings, AVAILABLE_MODELS, AVAILABLE_LANGUAGES, HOTKEY_MODES
 from audio_recorder import list_microphones
 
