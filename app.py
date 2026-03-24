@@ -8,7 +8,7 @@ from transcriber import Transcriber
 from text_inserter import insert_text
 from hotkey_handler import HotkeyHandler
 from tray_icon import TrayIcon
-from notification import show_error, show_status
+from notification import show_error, show_status, hide_status
 
 
 class State(Enum):
@@ -56,6 +56,7 @@ class App:
         try:
             self._recorder.start()
         except Exception as e:
+            hide_status()
             show_error(f"Mikrofon-Fehler: {e}")
             with self._lock:
                 self._state = State.IDLE
@@ -109,5 +110,6 @@ class App:
         ).start()
 
     def _quit(self) -> None:
+        hide_status()
         self._hotkey.stop()
         self._tray.stop()

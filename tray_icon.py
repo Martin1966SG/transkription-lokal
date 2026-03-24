@@ -5,6 +5,7 @@ from pystray import MenuItem as Item
 from icons import get_idle_icon, get_recording_icon, get_processing_icon
 
 APP_NAME = "TranskriptionLokal"
+APP_TITLE = "Transkription lokal"
 
 
 class TrayIcon:
@@ -18,7 +19,7 @@ class TrayIcon:
         self._icon = pystray.Icon(
             APP_NAME,
             icon=get_idle_icon(),
-            title=APP_NAME,
+            title=APP_TITLE,
             menu=pystray.Menu(
                 Item("Einstellungen", self._settings_clicked),
                 Item("Beenden", self._quit_clicked),
@@ -34,15 +35,15 @@ class TrayIcon:
 
     def set_idle(self) -> None:
         self._icon.icon = get_idle_icon()
-        self._icon.title = APP_NAME
+        self._icon.title = APP_TITLE
 
     def set_recording(self) -> None:
         self._icon.icon = get_recording_icon()
-        self._icon.title = f"{APP_NAME} – Aufnahme läuft..."
+        self._icon.title = f"{APP_TITLE} – Aufnahme läuft..."
 
     def set_processing(self) -> None:
         self._icon.icon = get_processing_icon()
-        self._icon.title = f"{APP_NAME} – Verarbeitung..."
+        self._icon.title = f"{APP_TITLE} – Verarbeitung..."
 
     def _settings_clicked(self, icon, item) -> None:
         self._on_settings()
